@@ -30,7 +30,7 @@
     <div class="mvs-section">
     <div class="mvs-container">
 
-        {{-- Mission & Vision Cards side by side --}}
+       
         <div class="mv-cards">
 
             <div class="mv-card">
@@ -49,7 +49,7 @@
 
         </div>
 
-        {{-- Shared Values below --}}
+        
         <div class="sv-card">
             <h3>Shared Values</h3>
             <p>Ang DILG ay Matino, Mahusay at Maasahan.</p>
