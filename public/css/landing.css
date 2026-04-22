@@ -56,7 +56,7 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;  /* ← center the content */
-  padding-left: 80px;
+  padding-left: 0;
   color: #fff;
   opacity: 1;
   transform: translateY(0);
@@ -65,8 +65,11 @@ body::before {
 
 .info {
   max-width: 700px;
+  text-align: center; 
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
 }
-
 .logos img {
   width: 180px; 
   height: auto; 
@@ -78,11 +81,10 @@ body::before {
   max-width: 100%; 
 }
 
+
 .logos {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; 
-  margin-bottom: 30px; 
+  justify-content: center; 
+  margin-bottom: 30px;
 }
 
 .info h1 {
@@ -91,6 +93,8 @@ body::before {
   line-height: 1.2;
   letter-spacing: 1px;
   margin-bottom: 5px;
+  white-space: nowrap;
+  text-align: center;
 }
 
 .info h2 {
@@ -98,18 +102,19 @@ body::before {
   font-weight: 300;
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .info p {
   font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 2px;
-  color: #ffcc00; 
-  border-left: 4px solid #ffcc00;
-  padding-left: 15px;
+  color: #ffcc00;
+  border: none;        
+  padding: 0;          
+  text-align: center; 
+  margin-top: 8px;
 }
-
-
 
 .wrapper {
   width: 420px;
@@ -296,9 +301,9 @@ button:hover {
   color: rgba(255, 255, 255, 0.85);
   line-height: 1.75;
   font-weight: 400;
-  border: none;        /* override your global .info p border */
-  padding: 0;          /* override your global .info p padding */
-  letter-spacing: 0;   /* override your global .info p spacing */
+  border: none;        
+  padding: 0;          
+  letter-spacing: 0;   
 }
 
 .mv-icon {
@@ -308,7 +313,7 @@ button:hover {
 
 /* ── ANIMATION ── */
 
-/* Left starts centered and fades in from above */
+
 .container.loading .left {
   width: 100%;
   padding-left: 0;
@@ -317,7 +322,7 @@ button:hover {
   transform: translateY(-20px);
 }
 
-/* Smooth entrance + slide */
+
 .left {
   opacity: 1;
   transform: translateY(0);
@@ -327,14 +332,13 @@ button:hover {
               transform 0.8s ease;
 }
 
-/* Right hidden initially */
 .container.loading .right {
   opacity: 0;
   pointer-events: none;
   transform: translateX(30px);
 }
 
-/* Right fades in after left slides */
+
 .right {
   opacity: 1;
   transform: translateX(0);
