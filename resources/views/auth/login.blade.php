@@ -30,7 +30,7 @@
                 <h2>Login</h2>
 
                 <div class="input-field">
-                    <input type="text" name="name" required>
+                    <input type="email" name="email" required>
                     <label>Enter your username</label>
                 </div>
 
