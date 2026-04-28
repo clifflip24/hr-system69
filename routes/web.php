@@ -21,4 +21,8 @@ Route::get('/ld-activities', function () {
     return view('layouts.ld_activities');
 })->name('ld.activities');
 
+Route::get('/form-download', function(){
+    return view('layouts.form-download');
+})->name('form-download');
+
 require __DIR__.'/auth.php';
