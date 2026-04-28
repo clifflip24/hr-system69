@@ -15,7 +15,7 @@
         <h4 class="text-center">MENU</h4>
         <h5> Welcome, {{ Auth::user()->name ?? 'Guest' }}</h5>
         <a href="{{ url('/dashboard') }}">Home</a>
-        <a href="#">L & D Activities</a>
+        <a href="{{ route('ld.activities') }}">L & D Activities</a>
 
         <form method="POST" action="{{ route('logout') }}">
             @csrf
@@ -40,9 +40,6 @@
     <!-- Page Content -->
     <div id="content" class="content">
         @yield('content')
-
-        <h1>HUMAN RESOURCE MANAGEMENT E-LIBRARY</h1>
-        <p>for sale hatdog!.</p>
     </div>
 
     <script src="{{ asset('js/nav.js') }}"></script>
