@@ -30,8 +30,8 @@
                 <h2>Login</h2>
 
                 <div class="input-field">
-                    <input type="text" name="name" required>
-                    <label>Enter your username</label>
+                    <input type="email" name="email" required>
+                    <label>Enter your email</label>
                 </div>
 
                 <div class="input-field">
