@@ -16,6 +16,7 @@
         <h5> Welcome, {{ Auth::user()->name ?? 'Guest' }}</h5>
         <a href="{{ url('/dashboard') }}">Home</a>
         <a href="{{ route('ld.activities') }}">L & D Activities</a>
+        <a href="{{ route('form-download')  }}">Forms</a>
 
         <form method="POST" action="{{ route('logout') }}">
             @csrf
