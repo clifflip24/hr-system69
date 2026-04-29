@@ -7,16 +7,16 @@
 
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+    </head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <body>
 
     <!-- Sidebar -->
     <div id="sidebar" class="sidebar">
-        <h4 class="text-center">MENU</h4>
-        <h5> Welcome, {{ Auth::user()->name ?? 'Guest' }}</h5>
-        <a href="{{ url('/dashboard') }}">Home</a>
-        <a href="{{ route('ld.activities') }}">L & D Activities</a>
-        <a href="{{ route('form-download')  }}">Forms</a>
+        <h3 class="text-center">MENU</h3>
+        <h3>  Welcome, {{ Auth::user()->name ?? 'Guest' }}</h3>
+        <a href="{{ url('/dashboard') }}"><i class="fa-solid fa-house fa-1.5x " style="color: rgb(107, 119, 140) "></i>  Home</a>
+        <a href="{{ route('ld.activities') }}"><i class="fa-solid fa-book fa-1.5x " style="color: rgb(107, 119, 140)"></i>   L & D Activities</a>
+        <a href="{{ route('form-download')  }}"><i class="fa-solid fa-download fa-1.5x " style="color: rgb(107, 119, 140)"></i>   Forms</a>
 
         <form method="POST" action="{{ route('logout') }}">
             @csrf
