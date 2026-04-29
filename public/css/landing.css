@@ -88,7 +88,7 @@ body::before {
 }
 
 .info h1 {
-  font-size: 2.2rem;
+  font-size: 1.4rem;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: 1px;
@@ -106,7 +106,7 @@ body::before {
 }
 
 .info p {
-  font-size: 1.1rem;
+  font-size: 1.8rem;
   font-weight: 600;
   letter-spacing: 2px;
   color: #ffcc00;
@@ -114,6 +114,7 @@ body::before {
   padding: 0;          
   text-align: center; 
   margin-top: 8px;
+  white-space: nowrap;
 }
 
 .wrapper {
