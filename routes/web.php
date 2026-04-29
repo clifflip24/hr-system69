@@ -3,6 +3,24 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+// User-facing controllers
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\ExamScheduleController;
+use App\Http\Controllers\JobPostingController;
+use App\Http\Controllers\FormController;
+
+// Admin controllers
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminAnnouncementController;
+use App\Http\Controllers\Admin\AdminExamScheduleController;
+use App\Http\Controllers\Admin\AdminJobPostingController;
+use App\Http\Controllers\Admin\AdminFormController;
+use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\ActivityLogController;
+
+// HR Officer controllers
+// (same controllers as above, just different middleware group)
 Route::get('/', function () {
     return view('welcome');
 });
