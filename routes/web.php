@@ -26,4 +26,6 @@ Route::get('/calendar', [EventController::class, 'index']);
 Route::get('/events', [EventController::class, 'fetch']);
 Route::post('/events', [EventController::class, 'store']);
 
+Route::put('/events/{id}', [EventController::class, 'update']);   // ✅
+Route::delete('/events/{id}', [EventController::class, 'destroy']); // ✅
 require __DIR__.'/auth.php';

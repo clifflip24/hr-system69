@@ -14,24 +14,38 @@ class EventController extends Controller
 
     public function fetch()
     {
-        // format for FullCalendar
-        return Event::all()->map(function ($e) {
-            return [
-                'id' => $e->id,
-                'title' => $e->event . ' (' . $e->status . ')',
-                'start' => $e->date,
-            ];
-        });
+        return response()->json(
+            Event::all()->map(function ($e) {
+                return [
+                    'id' => $e->id, // ✅ needed for edit/delete
+                    'title' => $e->event . ' (' . $e->status . ')',
+                    'start' => $e->date,
+                ];
+            })
+        );
     }
 
     public function store(Request $request)
     {
-        Event::create([
-            'date' => $request->date,
+        Event::create($request->all());
+        return response()->json(['success' => true]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $event = Event::findOrFail($id);
+
+        $event->update([
             'event' => $request->event,
             'status' => $request->status,
         ]);
 
+        return response()->json(['success' => true]);
+    }
+
+    public function destroy($id)
+    {
+        Event::findOrFail($id)->delete();
         return response()->json(['success' => true]);
     }
 }

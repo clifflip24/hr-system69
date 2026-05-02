@@ -51,7 +51,63 @@
                         calendar.refetchEvents();
                     }
                 });
+            },
+            eventClick: function(info) {
+ 
+            let eventId = info.event.id;
+
+            let choice = prompt("Type 'edit' to update or 'delete' to remove:");
+
+            //DELETE
+            if (choice === 'delete') {
+                if (confirm("Are you sure you want to delete this event?")) {
+
+                    fetch('/events/' + eventId, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert("Event deleted!");
+                            calendar.refetchEvents();
+                        }
+                    });
+                }
             }
+
+            //EDIT
+            else if (choice === 'edit') {
+
+                let newEvent = prompt("Enter new event:");
+                if (!newEvent) return;
+
+                let newStatus = prompt("Enter new status:");
+                if (!newStatus) return;
+
+                fetch('/events/' + eventId, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({
+                        event: newEvent,
+                        status: newStatus
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Event updated!");
+                        calendar.refetchEvents();
+                    }
+                });
+            }
+        }
+            
         });
 
         calendar.render();
