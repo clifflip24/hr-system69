@@ -110,3 +110,43 @@ body {
     
     max-width: 100%;  
 }
+.calendar-container {
+    max-width: 900px;   /* ✅ standard size */
+    margin: 40px auto;  /* center */
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* improve calendar look */
+.fc-toolbar-title {
+    font-size: 20px !important;
+    font-weight: bold;
+}
+
+.fc-button {
+    background-color: #007bff !important;
+    border: none !important;
+    padding: 5px 10px;
+    border-radius: 6px !important;
+}
+
+.fc-button:hover {
+    background-color: #0056b3 !important;
+}
+
+.fc-daygrid-day {
+    cursor: pointer;
+}
+
+.fc-event {
+    border-radius: 6px;
+    padding: 2px 5px;
+    font-size: 12px;
+}

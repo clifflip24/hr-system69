@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,5 +21,9 @@ Route::middleware('auth')->group(function () {
 Route::get('/ld-activities', function () {
     return view('layouts.ld_activities');
 })->name('ld.activities');
+
+Route::get('/calendar', [EventController::class, 'index']);
+Route::get('/events', [EventController::class, 'fetch']);
+Route::post('/events', [EventController::class, 'store']);
 
 require __DIR__.'/auth.php';
