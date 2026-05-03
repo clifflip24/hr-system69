@@ -208,3 +208,25 @@ button:hover {
 .register a:hover {
   text-decoration: underline;
 }
+
+.login-btn {
+  display: inline-block;
+  margin-top: 32px;
+  padding: 14px 48px;
+  background: #ffcc00;
+  color: #002b76;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.login-btn:hover {
+  background: #fff;
+  color: #002b76;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}

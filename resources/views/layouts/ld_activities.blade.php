@@ -106,32 +106,28 @@
                 method: 'GET'
             },
 
-            // ✅ ADD EVENT (still prompt for now)
+            //ADD EVENT 
             dateClick: function(info) {
 
             let modal = new bootstrap.Modal(document.getElementById('addEventModal'));
 
-            // store raw date for backend
             document.getElementById('addEventDate').dataset.raw = info.dateStr;
 
-            // show formatted date to user
             document.getElementById('addEventDate').value = formatDate(info.dateStr);
 
-            // clear previous input
             document.getElementById('addEventName').value = '';
             document.getElementById('addEventStatus').value = 'Pending';
 
             modal.show();
             },
 
-            // ✅ CLICK EVENT → OPEN MODAL
+            // CLICK EVENT AND IT OPEN THE MODAL
             eventClick: function(info) {
 
                 let modal = new bootstrap.Modal(document.getElementById('eventModal'));
 
                 let fullTitle = info.event.title;
 
-                // split "Meeting (pending)"
                 let match = fullTitle.match(/(.*)\s\((.*)\)/);
 
                 let eventName = match ? match[1] : fullTitle;
