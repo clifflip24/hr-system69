@@ -12,8 +12,8 @@
 
     <!-- Sidebar -->
     <div id="sidebar" class="sidebar">
-        <h3 class="text-center">MENU</h3>
-        <h3>  Welcome, {{ Auth::user()->name ?? 'Guest' }}</h3>
+        <h3 class="text-center">Dashboard</h3>
+      
         <a href="{{ url('/dashboard') }}"><i class="fa-solid fa-house fa-1.5x " style="color: rgb(107, 119, 140) "></i>  Home</a>
         <a href="{{ route('ld.activities') }}"><i class="fa-solid fa-book fa-1.5x " style="color: rgb(107, 119, 140)"></i>   L & D Activities</a>
         <a href="{{ route('form-download')  }}"><i class="fa-solid fa-download fa-1.5x " style="color: rgb(107, 119, 140)"></i>   Forms</a>
