@@ -31,7 +31,7 @@
 
                 <div class="input-field">
                     <input type="email" name="email" required>
-                    <label>Enter your email</label>
+                    <label>Enter your Email</label>
                 </div>
 
                 <div class="input-field">
