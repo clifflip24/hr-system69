@@ -24,6 +24,7 @@
                 <h2>REGION VIII</h2>
                 <p>HUMAN RESOURCE MANAGEMENT E-LIBRARY</p>
                 <a href="{{ route('login') }}" class="login-btn">Login</a>
+                <a class="login-btn">Guest Login</a> <!-- Change route to Guest Page add route"-->
             </div>
         </div>
     </section>
