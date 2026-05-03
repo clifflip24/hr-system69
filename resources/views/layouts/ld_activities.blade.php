@@ -6,18 +6,59 @@
     <h1>L & D Activities</h1>
     <p>This is the L & D content.</p>
     <div id="calendar"></div>
+    
+    <div class="modal fade" id="eventModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        <div class="modal-header">
+            <h5 class="modal-title">Event Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+            <input type="hidden" id="eventId">
+
+            <div class="mb-2">
+            <label>Date:</label>
+            <input type="text" id="eventDate" class="form-control" readonly>
+            </div>
+
+            <div class="mb-2">
+            <label>Event:</label>
+            <input type="text" id="eventName" class="form-control">
+            </div>
+
+            <div class="mb-2">
+            <label>Status:</label>
+            <select id="eventStatus" class="form-control">
+                <option value="Pending">Pending</option>
+                <option value="Ongoing">Ongoing</option>
+                <option value="Done">Done</option>
+            </select>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-danger" id="deleteBtn">Delete</button>
+            <button class="btn btn-primary" id="saveBtn">Save Changes</button>
+        </div>
+
+        </div>
+    </div>
+    </div>
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {
 
         let calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
             initialView: 'dayGridMonth',
-            height: 600, // ✅ consistent height
+            height: 600,
 
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
-                right: '' // remove extra clutter
+                right: ''
             },
 
             events: {
@@ -25,6 +66,7 @@
                 method: 'GET'
             },
 
+            // ✅ ADD EVENT (still prompt for now)
             dateClick: function(info) {
                 let eventName = prompt("Enter Event:");
                 if (!eventName) return;
@@ -47,71 +89,85 @@
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
-                        alert("Event added successfully!");
+                        alert("Event added!");
                         calendar.refetchEvents();
                     }
                 });
             },
+
+            // ✅ CLICK EVENT → OPEN MODAL
             eventClick: function(info) {
- 
-            let eventId = info.event.id;
 
-            let choice = prompt("Type 'edit' to update or 'delete' to remove:");
+                let modal = new bootstrap.Modal(document.getElementById('eventModal'));
 
-            //DELETE
-            if (choice === 'delete') {
-                if (confirm("Are you sure you want to delete this event?")) {
+                let fullTitle = info.event.title;
 
-                    fetch('/events/' + eventId, {
-                        method: 'DELETE',
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                        }
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert("Event deleted!");
-                            calendar.refetchEvents();
-                        }
-                    });
-                }
+                // split "Meeting (pending)"
+                let match = fullTitle.match(/(.*)\s\((.*)\)/);
+
+                let eventName = match ? match[1] : fullTitle;
+                let status = match ? match[2] : 'pending';
+
+                document.getElementById('eventId').value = info.event.id;
+                document.getElementById('eventDate').value = info.event.startStr;
+                document.getElementById('eventName').value = eventName;
+                document.getElementById('eventStatus').value = status;
+
+                modal.show();
             }
-
-            //EDIT
-            else if (choice === 'edit') {
-
-                let newEvent = prompt("Enter new event:");
-                if (!newEvent) return;
-
-                let newStatus = prompt("Enter new status:");
-                if (!newStatus) return;
-
-                fetch('/events/' + eventId, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    },
-                    body: JSON.stringify({
-                        event: newEvent,
-                        status: newStatus
-                    })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        alert("Event updated!");
-                        calendar.refetchEvents();
-                    }
-                });
-            }
-        }
-            
         });
 
         calendar.render();
+
+        //SAVE & EDIT
+        document.getElementById('saveBtn').addEventListener('click', function () {
+
+            let id = document.getElementById('eventId').value;
+
+            fetch('/events/' + id, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({
+                    event: document.getElementById('eventName').value,
+                    status: document.getElementById('eventStatus').value
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Event updated!");
+                    location.reload(); // or calendar.refetchEvents()
+                }
+            });
+        });
+
+        //DELETE
+        document.getElementById('deleteBtn').addEventListener('click', function () {
+
+            let id = document.getElementById('eventId').value;
+
+            if (!confirm("Delete this event?")) return;
+
+            fetch('/events/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Event deleted!");
+                    location.reload();
+                }
+            });
+        });
+
     });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 @endsection
