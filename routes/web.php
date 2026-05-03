@@ -30,15 +30,19 @@ Route::put('/events/{id}', [EventController::class, 'update']);
 Route::delete('/events/{id}', [EventController::class, 'destroy']);
 
 Route::get('/guest', function () {
-    return view('layouts.guest');
+    return view('layouts.user-guest-dashboard');
 })->name('guest');
 
 Route::get('/landing', function () {
     return view('landing');
 })->name('landing');
 
-Route::get('/ld-activities-content', function () {
-    return view('ld.activities-content');
-});
+Route::get('/User-Dashboard', function () {
+    return view('layouts.user-guest-dashboard');
+})->name('user.guest');
+
+Route::get('/User-Activities', function () {
+    return view('layouts.user-guest-activities');
+})->name('user.act');
 
 require __DIR__.'/auth.php';

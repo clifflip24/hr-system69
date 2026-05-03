@@ -23,6 +23,8 @@
     <div id="sidebar" class="sidebar">
         <h4 class="text-center">MENU</h4>
         <a href="{{ route('landing') }}" class="login-btn">Home</a>
+        <a href="{{ route('user.guest') }}" class="login-btn">Dashboard</a>
+        <a href="{{ route('user.act') }}" class="login-btn">L & D Activities</a>
     </div>
 
     <!-- Topbar -->
@@ -39,7 +41,7 @@
 
     <!-- Page Content -->
     <div id="content" class="content">
-        
+         @yield('content')
     </div>
 
     <script src="{{ asset('js/nav.js') }}"></script>
