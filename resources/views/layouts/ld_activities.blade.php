@@ -1,7 +1,5 @@
 @extends('layouts.dashboard-layout') 
-
-@section('title', 'L & D Activities')
-
+<link rel="stylesheet" href="{{ asset('css/form-download.css') }}">
 @section('content')
     <h1>L & D Activities</h1>
     <p>This is the L & D content.</p>
