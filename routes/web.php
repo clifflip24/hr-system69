@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventController;
 
 // User-facing controllers
 use App\Http\Controllers\DashboardController;
@@ -22,7 +23,7 @@ use App\Http\Controllers\Admin\ActivityLogController;
 // HR Officer controllers
 // (same controllers as above, just different middleware group)
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 });
 
 Route::get('/dashboard', function () {
@@ -42,5 +43,27 @@ Route::get('/ld-activities', function () {
 Route::get('/form-download', function(){
     return view('layouts.form-download');
 })->name('form-download');
+Route::get('/calendar', [EventController::class, 'index']);
+Route::get('/events', [EventController::class, 'fetch']);
+Route::post('/events', [EventController::class, 'store']);
+
+Route::put('/events/{id}', [EventController::class, 'update']);
+Route::delete('/events/{id}', [EventController::class, 'destroy']);
+
+Route::get('/guest', function () {
+    return view('layouts.user-guest-dashboard');
+})->name('guest');
+
+Route::get('/landing', function () {
+    return view('landing');
+})->name('landing');
+
+Route::get('/User-Dashboard', function () {
+    return view('layouts.user-guest-dashboard');
+})->name('user.guest');
+
+Route::get('/User-Activities', function () {
+    return view('layouts.user-guest-activities');
+})->name('user.act');
 
 require __DIR__.'/auth.php';

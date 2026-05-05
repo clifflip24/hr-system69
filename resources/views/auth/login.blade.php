@@ -19,6 +19,7 @@
             <h1>DEPARTMENT OF THE INTERIOR AND LOCAL GOVERNMENT</h1>
             <h2>REGION VIII</h2>
             <p>HUMAN RESOURCE MANAGEMENT E-LIBRARY</p>
+            <a href="{{ route('landing') }}" class="login-btn">Back</a>
         </div>
     </div>
 

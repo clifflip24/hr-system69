@@ -1,16 +1,16 @@
-@extends('layouts.dashboard-layout') 
-<link rel="stylesheet" href="{{ asset('css/form-download.css') }}">
+@extends('layouts.guest') 
+
+@section('title', 'L & D Activities')
+
 @section('content')
     <h1>L & D Activities</h1>
-    <p>This is the L & D content.</p>
     <div id="calendar"></div>
-    
     <div class="modal fade" id="eventModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
 
         <div class="modal-header">
-            <h5 class="modal-title">Event Details (Edit Event)</h5>
+            <h5 class="modal-title">Event Details</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
 
@@ -24,24 +24,18 @@
 
             <div class="mb-2">
             <label>Event:</label>
-            <input type="text" id="eventName" class="form-control">
+            <input type="text" id="eventName" class="form-control" readonly>
             </div>
 
             <div class="mb-2">
             <label>Status:</label>
-            <select id="eventStatus" class="form-control">
+            <select id="eventStatus" class="form-control" disabled>
                 <option value="Pending">Pending</option>
                 <option value="Ongoing">Ongoing</option>
                 <option value="Done">Done</option>
             </select>
             </div>
         </div>
-
-        <div class="modal-footer">
-            <button class="btn btn-danger" id="deleteBtn">Delete</button>
-            <button class="btn btn-primary" id="saveBtn">Save Changes</button>
-        </div>
-
         </div>
     </div>
     </div>
@@ -104,22 +98,7 @@
                 method: 'GET'
             },
 
-            //ADD EVENT 
-            dateClick: function(info) {
-
-            let modal = new bootstrap.Modal(document.getElementById('addEventModal'));
-
-            document.getElementById('addEventDate').dataset.raw = info.dateStr;
-
-            document.getElementById('addEventDate').value = formatDate(info.dateStr);
-
-            document.getElementById('addEventName').value = '';
-            document.getElementById('addEventStatus').value = 'Pending';
-
-            modal.show();
-            },
-
-            // CLICK EVENT AND IT OPEN THE MODAL
+            // display calendar
             eventClick: function(info) {
 
                 let modal = new bootstrap.Modal(document.getElementById('eventModal'));
@@ -172,53 +151,6 @@
         });
 
         calendar.render();
-
-        //SAVE & EDIT
-        document.getElementById('saveBtn').addEventListener('click', function () {
-
-            let id = document.getElementById('eventId').value;
-
-            fetch('/events/' + id, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                },
-                body: JSON.stringify({
-                    event: document.getElementById('eventName').value,
-                    status: document.getElementById('eventStatus').value
-                })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    alert("Event updated!");
-                    location.reload();
-                }
-            });
-        });
-
-        //DELETE
-        document.getElementById('deleteBtn').addEventListener('click', function () {
-
-            let id = document.getElementById('eventId').value;
-
-            if (!confirm("Delete this event?")) return;
-
-            fetch('/events/' + id, {
-                method: 'DELETE',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    alert("Event deleted!");
-                    location.reload();
-                }
-            });
-        });
         function formatDate(dateString) {
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             return new Date(dateString).toLocaleDateString('en-US', options);
