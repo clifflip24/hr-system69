@@ -21,10 +21,20 @@
         
     <!-- Sidebar -->
     <div id="sidebar" class="sidebar">
-        <h4 class="text-center">MENU</h4>
-        <a href="{{ route('landing') }}" class="login-btn">Home</a>
-        <a href="{{ route('user.guest') }}" class="login-btn">Dashboard</a>
-        <a href="{{ route('user.act') }}" class="login-btn">L & D Activities</a>
+    <h4 class="text-center">MENU</h4>
+
+        <a href="{{ route('landing') }}" class="glass-btn">
+            <span class="glass-btn__icon">🏠</span>
+            <span class="glass-btn__label">Home</span>
+        </a>
+        <a href="{{ route('user.guest') }}" class="glass-btn">
+            <span class="glass-btn__icon">📊</span>
+            <span class="glass-btn__label">Dashboard</span>
+        </a>
+        <a href="{{ route('user.act') }}" class="glass-btn">
+            <span class="glass-btn__icon">📚</span>
+            <span class="glass-btn__label">L & D Activities</span>
+        </a>
     </div>
 
     <!-- Topbar -->
@@ -32,7 +42,7 @@
         <div class ="logos">
             <img src="/logo.png" alt="DILG Logo">
         </div>
-        <button id="toggleBtn" class="btn btn-light me-2">☰</button>
+        <button id="toggleBtn" class="btn btn-light me-2 left-margin 2px">☰</button>
 
         <h5 class="mb-0">
             | DEPARTMENT OF THE INTERIOR AND LOCAL GOVERNMENT REGION VIII

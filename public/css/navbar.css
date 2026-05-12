@@ -14,7 +14,7 @@ body {
     left: 0;
     width: 250px; 
     height: 100vh;
-    background: #34495e;
+    background: #0a1b5d;
     color: #fff;
     padding-top: 20px;
 
@@ -155,4 +155,55 @@ h2 {
     font-weight: bold;
     font-size: 20px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.glass-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    border-radius: 14px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.4px;
+
+    /* Glassmorphism core */
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.glass-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+.glass-btn:active {
+    transform: translateY(0px);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.glass-btn__icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.glass-btn__label {
+    flex: 1;
 }
